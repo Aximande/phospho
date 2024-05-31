@@ -25,6 +25,11 @@ if not openai_api_key or not phospho_api_key or not phospho_project_id:
 # Initialize OpenAI client
 client = openai.OpenAI(api_key=openai_api_key)
 
+# Initialize Phospho with API key, project ID, and base URL from environment variables
+phospho.init(api_key=phospho_api_key,
+             project_id=phospho_project_id,
+             base_url=phospho_base_url)
+
 class ArticleGenerator:
     def __init__(self):
         self.system_prompt = "Generate an SEO-optimized article based on user inputs."
