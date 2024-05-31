@@ -6,10 +6,10 @@ from typing import Any, Dict, Generator, List, Optional
 import streamlit as st
 import openai
 import phospho
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 # Load environment variables
-load_dotenv()
+#load_dotenv()
 #openai_api_key = os.getenv('OPENAI_API_KEY')
 #phospho_api_key = os.getenv('PHOSPHO_API_KEY')
 #phospho_project_id = os.getenv('PHOSPHO_PROJECT_ID')
