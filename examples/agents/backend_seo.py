@@ -10,10 +10,12 @@ from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
-openai_api_key = os.getenv('OPENAI_API_KEY')
-phospho_api_key = os.getenv('PHOSPHO_API_KEY')
-phospho_project_id = os.getenv('PHOSPHO_PROJECT_ID')
-phospho_base_url = os.getenv('PHOSPHO_BASE_URL', 'https://api.phospho.com')
+#openai_api_key = os.getenv('OPENAI_API_KEY')
+#phospho_api_key = os.getenv('PHOSPHO_API_KEY')
+#phospho_project_id = os.getenv('PHOSPHO_PROJECT_ID')
+#phospho_base_url = os.getenv('PHOSPHO_BASE_URL', 'https://api.phospho.com')
+
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 # Check if environment variables are set
 if not openai_api_key or not phospho_api_key or not phospho_project_id:
@@ -22,11 +24,6 @@ if not openai_api_key or not phospho_api_key or not phospho_project_id:
 
 # Initialize OpenAI client
 client = openai.OpenAI(api_key=openai_api_key)
-
-# Initialize Phospho with API key, project ID, and base URL from environment variables
-phospho.init(api_key=phospho_api_key,
-             project_id=phospho_project_id,
-             base_url=phospho_base_url)
 
 class ArticleGenerator:
     def __init__(self):
@@ -113,3 +110,11 @@ class ArticleGenerator:
             )
         except Exception as e:
             st.warning(f"Failed to send feedback to Phospho: {e}")
+
+phospho.init(
+    api_key=st.secrets["PHOSPHO_API_KEY"],
+    project_id=st.secrets["PHOSPHO_PROJECT_ID"],
+    # base_url="http://127.0.0.1:8000/v2",
+    base_url=os.getenv("PHOSPHO_BASE_URL"),
+    # version_id="v2"
+)
